@@ -14,12 +14,17 @@ body{
     font-family: "Arial Rounded MT Bold", sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .library{
     display: grid;
     gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .book{
     background-color: var(--main-color);
+    height: 280px;
+    padding: 10px;
 }
