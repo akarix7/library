@@ -1,4 +1,5 @@
 const library = document.querySelector(".library");
+const container = document.querySelector(".container");
 window.addEventListener("load", startup, false);
 
 let libraryArray = [];
@@ -48,8 +49,22 @@ function buildLibrary(){
 
 }
 
+function createAddButton(){
+    let button = document.createElement("button");
+    button.className = "add";
+    button.textContent = "Add Book";
+    container.appendChild(button);
+
+    button.addEventListener("click", () => {
+
+    })
+}
+
+
+
 function startup() {
     // buildLibrary();
+    createAddButton();
 }
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
@@ -58,6 +73,7 @@ const aManCalledOve = new Book("A Man Called Ove", "Fredrik Backman", 368, false
 const theMartian = new Book("The Martian", "Andy Weir", 369, false);
 const becoming = new Book("Becoming", "Michelle Obama", 448, false);
 const theHatchet = new Book("The Hatchet", "Gary Paulsen", 195, false);
+//const aPromisedLand = new Book("A Promised Land", "Barack Obama", 768, false);
 
 addToLibrary(theHobbit);
 addToLibrary(theMidnightLibrary);
@@ -65,6 +81,7 @@ addToLibrary(aManCalledOve);
 addToLibrary(theMartian);
 addToLibrary(becoming);
 addToLibrary(theHatchet);
+//addToLibrary(aPromisedLand);
 
 // console.log(theHobbit.info());
 
