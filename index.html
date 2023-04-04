@@ -12,23 +12,25 @@
 </head>
 <body>
 <div class="container">
-    <div class="popupForm">
-        <label for="title">Title:
-            <input id="title" name="title" type="text">
-        </label>
+    <form id="addNewBook" action="./script.js">
+        <div class="popupForm">
+            <label for="title">Title:
+                <input id="title" name="title" type="text">
+            </label>
 
-        <label for="author">Author:
-            <input id="author" name="author" type="text">
-        </label>
+            <label for="author">Author:
+                <input id="author" name="author" type="text">
+            </label>
 
-        <label for="pages">Pages:
-            <input id="pages" name="pages" type="text">
-        </label>
-        <label for="read">Read?
-            <input id="read" name="read" type="checkbox">
-        </label>
-        <input type="submit" value="Submit">
-    </div>
+            <label for="pages">Pages:
+                <input id="pages" name="pages" type="text">
+            </label>
+            <label for="read">Read?
+                <input id="read" name="read" type="checkbox">
+            </label>
+            <input type="submit" form="addNewBook" value="Submit">
+        </div>
+    </form>
     <div class="library">
 
     </div>

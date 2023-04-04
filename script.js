@@ -1,8 +1,18 @@
 const library = document.querySelector(".library");
 const container = document.querySelector(".container");
+const form = document.querySelector("#addNewBook");
 window.addEventListener("load", startup, false);
 
 let libraryArray = [];
+
+// class Book {
+//     constructor(title, author, pages, read) {
+//         this.title = title;
+//         this.author = author;
+//         this.pages = pages;
+//         this.read = read;
+//     }
+// }
 
 function Book (title, author, pages, read){
     this.title = title;
@@ -18,7 +28,7 @@ function addToLibrary(Book){
     libraryArray.push(Book);
     buildLibrary();
     displayBook();
-    console.log(libraryArray);
+    //console.log(libraryArray);
 }
 
 function displayBook(){
@@ -59,12 +69,34 @@ function createAddButton(){
 
     })
 }
+function errorMessage(input){
+    const isRequired = " is required.";
+    let error = document.createElement("p");
+    error.className = "errorMessage";
+    error.textContent = input.charAt(0).toUpperCase() + input.slice(1) + `${isRequired}`
+    container.appendChild(error);
+}
+function validateData(input){
+    if(input.value === ""){
+        return errorMessage(input.name);
+    }
+}
 
+function submitForm(){
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        for(let i = 0; i < form.elements.length; i++) {
+            validateData(form.elements[i]);
+            //form.submit();
+        }
+    });
+}
 
 
 function startup() {
     // buildLibrary();
     createAddButton();
+    submitForm();
 }
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
