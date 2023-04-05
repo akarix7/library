@@ -102,7 +102,7 @@ function submitForm(){
 
 function showForm(){
     const popup = document.querySelector(".popupForm");
-    popup.hidden = false;
+    popup.style.visibility = "visible";
 }
 
 

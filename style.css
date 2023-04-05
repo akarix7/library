@@ -5,6 +5,7 @@
 
 :root{
     --main-color: #69BDAD;
+    --sub-color: #BBC6C8;
     --background: #fff;
 }
 
@@ -31,4 +32,22 @@ body{
 
 .notRead{
     opacity: 75%;
+}
+
+.popupForm{
+    visibility: hidden;
+    width: 270px;
+    height: 130px;
+    background-color: var(--sub-color);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
