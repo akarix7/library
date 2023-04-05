@@ -4,6 +4,7 @@ const form = document.querySelector("#addNewBook");
 window.addEventListener("load", startup, false);
 
 let libraryArray = [];
+let bookArray = [];
 
 // class Book {
 //     constructor(title, author, pages, read) {
@@ -69,6 +70,7 @@ function createAddButton(){
 
     })
 }
+
 function errorMessage(input){
     const isRequired = " is required.";
     let error = document.createElement("p");
@@ -78,16 +80,24 @@ function errorMessage(input){
 }
 function validateData(input){
     if(input.value === ""){
-        return errorMessage(input.name);
+        errorMessage(input.name);
+        return false;
+    }else{
+        return true;
     }
+    //return input.value === "" ? errorMessage(input.name) : true;
 }
 
 function submitForm(){
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        for(let i = 0; i < form.elements.length; i++) {
-            validateData(form.elements[i]);
-            //form.submit();
+
+        if(validateData(form.elements["title"]) &&
+            validateData(form.elements["author"]) &&
+            validateData(form.elements["pages"])){
+            const notRead = form.elements["read"].value !== "no";
+            const book = new Book(form.elements["title"].value, form.elements["author"].value, form.elements["pages"].value, notRead);
+            addToLibrary(book);
         }
     });
 }
