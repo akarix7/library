@@ -4,7 +4,7 @@
 }
 
 :root{
-    --main-color: #C9AA7A;
+    --main-color: #69BDAD;
     --background: #fff;
 }
 
@@ -27,4 +27,8 @@ body{
     background-color: var(--main-color);
     height: 280px;
     padding: 10px;
+}
+
+.notRead{
+    opacity: 75%;
 }

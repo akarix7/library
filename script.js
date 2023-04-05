@@ -4,7 +4,6 @@ const form = document.querySelector("#addNewBook");
 window.addEventListener("load", startup, false);
 
 let libraryArray = [];
-let bookArray = [];
 
 // class Book {
 //     constructor(title, author, pages, read) {
@@ -29,7 +28,6 @@ function addToLibrary(Book){
     libraryArray.push(Book);
     buildLibrary();
     displayBook();
-    //console.log(libraryArray);
 }
 
 function displayBook(){
@@ -67,7 +65,7 @@ function createAddButton(){
     container.appendChild(button);
 
     button.addEventListener("click", () => {
-
+        showForm();
     })
 }
 
@@ -100,6 +98,11 @@ function submitForm(){
             addToLibrary(book);
         }
     });
+}
+
+function showForm(){
+    const popup = document.querySelector(".popupForm");
+    popup.hidden = false;
 }
 
 
