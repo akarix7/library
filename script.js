@@ -31,13 +31,20 @@ function addToLibrary(Book){
 }
 
 function displayBook(){
-    let i = 0;
-    for(const bk of library.children){
-        bk.firstElementChild.textContent = libraryArray[i].title;
-        bk.firstElementChild.nextElementSibling.textContent = libraryArray[i].author;
-        bk.lastElementChild.textContent = libraryArray[i].pages;
-        i++;
-    }
+    const book = document.querySelector(".library > :last-child");
+
+    book.children[0].textContent = libraryArray[libraryArray.length - 1].title;
+    book.children[1].textContent = libraryArray[libraryArray.length - 1].author;
+    book.children[2].textContent = libraryArray[libraryArray.length - 1].pages;
+
+
+    // let i = 0;
+    // for(const bk of library.children){
+    //     // bk.firstElementChild.textContent = libraryArray[i].title;
+    //     // bk.firstElementChild.nextElementSibling.textContent = libraryArray[i].author;
+    //     // bk.lastElementChild.textContent = libraryArray[i].pages;
+    //     i++;
+    // }
 }
 
 function buildLibrary(){
@@ -51,11 +58,15 @@ function buildLibrary(){
     authorH3.className = "author";
     let pages = document.createElement("p");
     pages.className = "pages";
+    let removeImg = document.createElement("img");
+    removeImg.className = "remove-book icon";
+    removeImg.alt = "Remove Book";
+    removeImg.src = "images/close-thick.svg";
 
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
-
+    bookDiv.appendChild(removeImg);
 }
 
 function createAddButton(){
@@ -68,6 +79,13 @@ function createAddButton(){
         showForm();
     })
     closeButton();
+}
+
+function closeButton(){
+    const closeIcon = document.querySelector(".close");
+    closeIcon.addEventListener("click", () => {
+        closeForm();
+    })
 }
 
 function errorMessage(input){
@@ -101,13 +119,6 @@ function submitForm(){
     });
 }
 
-function closeButton(){
-    const closeIcon = document.querySelector(".close");
-    closeIcon.addEventListener("click", () => {
-        closeForm();
-    })
-}
-
 function showForm(){
     const popup = document.querySelector(".popupForm");
     popup.style.visibility = "visible";
@@ -128,17 +139,17 @@ function startup() {
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 const theMidnightLibrary = new Book("The Midnight Library", "Matt Haig", 304, false);
 const aManCalledOve = new Book("A Man Called Ove", "Fredrik Backman", 368, false);
-const theMartian = new Book("The Martian", "Andy Weir", 369, false);
-const becoming = new Book("Becoming", "Michelle Obama", 448, false);
-const theHatchet = new Book("The Hatchet", "Gary Paulsen", 195, false);
+// const theMartian = new Book("The Martian", "Andy Weir", 369, false);
+// const becoming = new Book("Becoming", "Michelle Obama", 448, false);
+// const theHatchet = new Book("The Hatchet", "Gary Paulsen", 195, false);
 //const aPromisedLand = new Book("A Promised Land", "Barack Obama", 768, false);
 
 addToLibrary(theHobbit);
 addToLibrary(theMidnightLibrary);
 addToLibrary(aManCalledOve);
-addToLibrary(theMartian);
-addToLibrary(becoming);
-addToLibrary(theHatchet);
+// addToLibrary(theMartian);
+// addToLibrary(becoming);
+// addToLibrary(theHatchet);
 //addToLibrary(aPromisedLand);
 
 // console.log(theHobbit.info());
