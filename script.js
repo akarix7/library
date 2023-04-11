@@ -67,6 +67,7 @@ function createAddButton(){
     button.addEventListener("click", () => {
         showForm();
     })
+    closeButton();
 }
 
 function errorMessage(input){
@@ -100,9 +101,21 @@ function submitForm(){
     });
 }
 
+function closeButton(){
+    const closeIcon = document.querySelector(".close");
+    closeIcon.addEventListener("click", () => {
+        closeForm();
+    })
+}
+
 function showForm(){
     const popup = document.querySelector(".popupForm");
     popup.style.visibility = "visible";
+}
+
+function closeForm(){
+    const popup = document.querySelector(".popupForm");
+    popup.style.visibility = "hidden";
 }
 
 
