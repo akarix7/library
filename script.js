@@ -22,7 +22,7 @@ class Library {
         //const node = new BookNode(title, author, pages, read);
         let curr;
 
-        if(this.head == null){
+        if(this.head === null){
             this.head = node;
         }else{
             curr = this.head;
@@ -34,11 +34,12 @@ class Library {
         }
     }
     removeNode(index){
+        console.log("index: " + typeof(index));
         let count = 0;
         let temp = this.head;
         let prevNode;
 
-        if(index > 0 && this.size() > 0 && (index <= this.size() - 1)){
+        if(index >= 0 && this.size() > 0 && (index <= this.size() - 1)){
             if(index === 0){
                 if(temp !== null){
                     temp = temp.next;
@@ -46,7 +47,9 @@ class Library {
                 }
             }else if(this.size() === 1){
                 this.head = null;
+                console.log("two");
             }else{
+                console.log("three");
                 while(count !== index){
                     prevNode = temp;
                     temp = temp.next;
@@ -140,6 +143,7 @@ function buildLibrary(){
     pages.className = "pages";
     let removeImg = document.createElement("img");
     removeImg.className = "remove-book icon";
+    removeImg.dataset.index = (bookList.size() - 1).toString();
     removeImg.alt = "Remove Book";
     removeImg.src = "images/close-thick.svg";
 
@@ -147,7 +151,6 @@ function buildLibrary(){
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
-    removeButton();
 }
 
 function createAddButton(){
@@ -168,12 +171,24 @@ function closeButton(){
         closeForm();
     })
 }
-
+//remove all books = querySelectorAll + foreach + addEventListener
 function removeButton(){
-    const removeIcon = document.querySelector(".remove-book");
-    removeIcon.addEventListener("click", () => {
-        console.log("hello");
-        bookList.removeNode(2);
+    //const removeIcon = document.querySelector("[data-index=\"0\"]");
+    //const removeIcon = document.querySelector(".remove-book");
+
+    // removeIcon.addEventListener("click", (e) => {
+    //     //const removeIndex = document.querySelector("[data-index=\"${e.}]")
+    //     //bookList.removeNode(removeIcon.dataset.index);
+    //     console.log(removeIcon.dataset.index);
+    //     console.log(e.target.dataset.index);
+    // })
+
+    const removeIcon = document.querySelectorAll("[data-index]");
+    removeIcon.forEach((button) => {
+        button.addEventListener("click", () => {
+            bookList.removeNode(parseInt(button.dataset.index));
+            console.log(button.dataset.index);
+        })
     })
 }
 
@@ -224,6 +239,7 @@ function startup() {
     // buildLibrary();
     createAddButton();
     submitForm();
+    removeButton();
 }
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
