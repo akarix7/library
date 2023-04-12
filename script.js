@@ -4,13 +4,22 @@ const form = document.querySelector("#addNewBook");
 window.addEventListener("load", startup, false);
 
 let libraryArray = [];
+class BookNode {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.next = null;
+    }
+}
 
 class Library {
     constructor() {
         this.head = null;
     }
-    addNode(title, author, pages, read){
-        let node = new BookNode(title, author, pages, read);
+    addNode(node){
+        //const node = new BookNode(title, author, pages, read);
         let curr;
 
         if(this.head == null){
@@ -76,16 +85,6 @@ class Library {
     }
 }
 
-class BookNode {
-    constructor(title, author, pages, read) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
-        this.next = null;
-    }
-}
-
 function Book (title, author, pages, read){
     this.title = title;
     this.author = author;
@@ -98,9 +97,9 @@ function Book (title, author, pages, read){
 
 let bookList = new Library();
 
-function addToLibrary(BookNode){
+function addToLibrary(book){
     //libraryArray.push(Book);
-    bookList.addNode(BookNode);
+    bookList.addNode(book);
     buildLibrary();
     displayBook();
 }
@@ -111,8 +110,7 @@ function displayBook(){
     book.children[1].textContent = bookList.displayLastNode().title;
     book.children[2].textContent = bookList.displayLastNode().author;
     book.children[3].textContent = bookList.displayLastNode().pages;
-    console.log(bookList.displayLastNode());
-    //
+
     // book.children[1].textContent = libraryArray[libraryArray.length - 1].title;
     // book.children[2].textContent = libraryArray[libraryArray.length - 1].author;
     // book.children[3].textContent = libraryArray[libraryArray.length - 1].pages;
@@ -196,7 +194,7 @@ function submitForm(){
             //const book = new Book(form.elements["title"].value, form.elements["author"].value, form.elements["pages"].value, notRead);
             //addToLibrary(book);
             const node = new BookNode(form.elements["title"].value, form.elements["author"].value, form.elements["pages"].value, notRead);
-            bookList.addNode(node);
+            addToLibrary(node);
         }
     });
 }
@@ -242,4 +240,3 @@ const aManCalledOveNode = new BookNode("A Man Called Ove", "Fredrik Backman", 36
 addToLibrary(theHobbitNode);
 addToLibrary(theMidnightLibraryNode);
 addToLibrary(aManCalledOveNode);
-
