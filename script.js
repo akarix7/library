@@ -38,20 +38,22 @@ class Library {
         let temp = this.head;
         let prevNode;
 
-        if(index === 0){
-            if(temp !== null){
-                temp = temp.next;
-                this.head = temp;
+        if(index > 0 && this.size() > 0 && (index <= this.size() - 1)){
+            if(index === 0){
+                if(temp !== null){
+                    temp = temp.next;
+                    this.head = temp;
+                }
+            }else if(this.size() === 1){
+                this.head = null;
+            }else{
+                while(count !== index){
+                    prevNode = temp;
+                    temp = temp.next;
+                    count++;
+                }
+                prevNode.next = temp.next;
             }
-        }else if(this.size() > 1) {
-            while (count !== index) {
-                prevNode = temp;
-                temp = temp.next;
-                count++;
-            }
-            prevNode.next = temp.next;
-        }else{
-            this.head = null;
         }
     }
     displayLastNode(){
@@ -145,6 +147,7 @@ function buildLibrary(){
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
+    removeButton();
 }
 
 function createAddButton(){
@@ -163,6 +166,14 @@ function closeButton(){
     const closeIcon = document.querySelector(".close");
     closeIcon.addEventListener("click", () => {
         closeForm();
+    })
+}
+
+function removeButton(){
+    const removeIcon = document.querySelector(".remove-book");
+    removeIcon.addEventListener("click", () => {
+        console.log("hello");
+        bookList.removeNode(2);
     })
 }
 
