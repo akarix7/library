@@ -45,6 +45,16 @@ class Library {
             this.head = null;
         }
     }
+    displayLastNode(){
+        let tempNode = this.head;
+        let displayNode;
+
+        while(tempNode){
+            displayNode = tempNode;
+            tempNode = tempNode.next;
+        }
+        return displayNode;
+    }
     isEmpty(){
         return this.head === null;
     }
@@ -86,8 +96,11 @@ function Book (title, author, pages, read){
     }
 }
 
-function addToLibrary(Book){
-    libraryArray.push(Book);
+let bookList = new Library();
+
+function addToLibrary(BookNode){
+    //libraryArray.push(Book);
+    bookList.addNode(BookNode);
     buildLibrary();
     displayBook();
 }
@@ -95,9 +108,14 @@ function addToLibrary(Book){
 function displayBook(){
     const book = document.querySelector(".library > :last-child");
 
-    book.children[1].textContent = libraryArray[libraryArray.length - 1].title;
-    book.children[2].textContent = libraryArray[libraryArray.length - 1].author;
-    book.children[3].textContent = libraryArray[libraryArray.length - 1].pages;
+    book.children[1].textContent = bookList.displayLastNode().title;
+    book.children[2].textContent = bookList.displayLastNode().author;
+    book.children[3].textContent = bookList.displayLastNode().pages;
+    console.log(bookList.displayLastNode());
+    //
+    // book.children[1].textContent = libraryArray[libraryArray.length - 1].title;
+    // book.children[2].textContent = libraryArray[libraryArray.length - 1].author;
+    // book.children[3].textContent = libraryArray[libraryArray.length - 1].pages;
 
 
     // let i = 0;
@@ -154,7 +172,7 @@ function errorMessage(input){
     const isRequired = " is required.";
     let error = document.createElement("p");
     error.className = "errorMessage";
-    error.textContent = input.charAt(0).toUpperCase() + input.slice(1) + `${isRequired}`
+    error.textContent = input.charAt(0).toUpperCase() + input.slice(1) + `${isRequired}`;
     container.appendChild(error);
 }
 function validateData(input){
@@ -175,8 +193,10 @@ function submitForm(){
             validateData(form.elements["author"]) &&
             validateData(form.elements["pages"])){
             const notRead = form.elements["read"].value !== "no";
-            const book = new Book(form.elements["title"].value, form.elements["author"].value, form.elements["pages"].value, notRead);
-            addToLibrary(book);
+            //const book = new Book(form.elements["title"].value, form.elements["author"].value, form.elements["pages"].value, notRead);
+            //addToLibrary(book);
+            const node = new BookNode(form.elements["title"].value, form.elements["author"].value, form.elements["pages"].value, notRead);
+            bookList.addNode(node);
         }
     });
 }
@@ -205,9 +225,9 @@ const aManCalledOve = new Book("A Man Called Ove", "Fredrik Backman", 368, false
 // const theHatchet = new Book("The Hatchet", "Gary Paulsen", 195, false);
 //const aPromisedLand = new Book("A Promised Land", "Barack Obama", 768, false);
 
-addToLibrary(theHobbit);
-addToLibrary(theMidnightLibrary);
-addToLibrary(aManCalledOve);
+// addToLibrary(theHobbit);
+// addToLibrary(theMidnightLibrary);
+// addToLibrary(aManCalledOve);
 // addToLibrary(theMartian);
 // addToLibrary(becoming);
 // addToLibrary(theHatchet);
@@ -215,15 +235,11 @@ addToLibrary(aManCalledOve);
 
 // console.log(theHobbit.info());
 
-let lib = new Library();
-console.log(lib.isEmpty());
-const testBook = new BookNode("Hope", "Bluebell", 300, false);
-lib.addNode(testBook);
-const testBook2 = new BookNode("The Martian", "Andy Weir", 369, false);
-lib.addNode(testBook2);
+const theHobbitNode = new BookNode("The Hobbit", "J.R.R. Tolkien", 295, false);
+const theMidnightLibraryNode = new BookNode("The Midnight Library", "Matt Haig", 304, false);
+const aManCalledOveNode = new BookNode("A Man Called Ove", "Fredrik Backman", 368, false);
 
-lib.removeNode(0);
-lib.printList();
-
-
+addToLibrary(theHobbitNode);
+addToLibrary(theMidnightLibraryNode);
+addToLibrary(aManCalledOveNode);
 
