@@ -5,14 +5,76 @@ window.addEventListener("load", startup, false);
 
 let libraryArray = [];
 
-// class Book {
-//     constructor(title, author, pages, read) {
-//         this.title = title;
-//         this.author = author;
-//         this.pages = pages;
-//         this.read = read;
-//     }
-// }
+class Library {
+    constructor() {
+        this.head = null;
+    }
+    addNode(title, author, pages, read){
+        let node = new BookNode(title, author, pages, read);
+        let curr;
+
+        if(this.head == null){
+            this.head = node;
+        }else{
+            curr = this.head;
+
+            while(curr.next){
+                curr = curr.next;
+            }
+            curr.next = node;
+        }
+    }
+    removeNode(index){
+        let count = 0;
+        let temp = this.head;
+        let prevNode;
+
+        if(index === 0){
+            if(temp !== null){
+                temp = temp.next;
+                this.head = temp;
+            }
+        }else if(this.size() > 1) {
+            while (count !== index) {
+                prevNode = temp;
+                temp = temp.next;
+                count++;
+            }
+            prevNode.next = temp.next;
+        }else{
+            this.head = null;
+        }
+    }
+    isEmpty(){
+        return this.head === null;
+    }
+    size(){
+        let count = 0;
+        let node = this.head;
+        while(node){
+            count++;
+            node = node.next;
+        }
+        return count;
+    }
+    printList(){
+        let node = this.head;
+        while(node){
+            console.log(node);
+            node = node.next;
+        }
+    }
+}
+
+class BookNode {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.next = null;
+    }
+}
 
 function Book (title, author, pages, read){
     this.title = title;
@@ -33,9 +95,9 @@ function addToLibrary(Book){
 function displayBook(){
     const book = document.querySelector(".library > :last-child");
 
-    book.children[0].textContent = libraryArray[libraryArray.length - 1].title;
-    book.children[1].textContent = libraryArray[libraryArray.length - 1].author;
-    book.children[2].textContent = libraryArray[libraryArray.length - 1].pages;
+    book.children[1].textContent = libraryArray[libraryArray.length - 1].title;
+    book.children[2].textContent = libraryArray[libraryArray.length - 1].author;
+    book.children[3].textContent = libraryArray[libraryArray.length - 1].pages;
 
 
     // let i = 0;
@@ -63,10 +125,10 @@ function buildLibrary(){
     removeImg.alt = "Remove Book";
     removeImg.src = "images/close-thick.svg";
 
+    bookDiv.appendChild(removeImg);
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
-    bookDiv.appendChild(removeImg);
 }
 
 function createAddButton(){
@@ -129,7 +191,6 @@ function closeForm(){
     popup.style.visibility = "hidden";
 }
 
-
 function startup() {
     // buildLibrary();
     createAddButton();
@@ -153,4 +214,16 @@ addToLibrary(aManCalledOve);
 //addToLibrary(aPromisedLand);
 
 // console.log(theHobbit.info());
+
+let lib = new Library();
+console.log(lib.isEmpty());
+const testBook = new BookNode("Hope", "Bluebell", 300, false);
+lib.addNode(testBook);
+const testBook2 = new BookNode("The Martian", "Andy Weir", 369, false);
+lib.addNode(testBook2);
+
+lib.removeNode(0);
+lib.printList();
+
+
 
