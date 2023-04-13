@@ -6,7 +6,10 @@
 :root{
     --main-color: #69BDAD;
     --sub-color: #BBC6C8;
-    --background: #fff;
+    --sun-color-darker: #8d9191;
+    --complement: #837FAC;
+    --darker-complement: #6D6997;
+    --background: #4C7F88;
 }
 
 body{
@@ -19,15 +22,28 @@ body{
     align-items: center;
 }
 
+.project-name{
+    text-align: center;
+}
+
+.container > button{
+    padding: 7px;
+    font-weight: 600;
+    background-color: var(--main-color);
+    border: 2px solid #d5d5d5;
+    margin-bottom: 15px;
+}
 .library{
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
 }
 .book{
-    background-color: var(--main-color);
+    background-color: var(--complement);
     height: 280px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .notRead{
@@ -37,7 +53,7 @@ body{
 .popupForm{
     visibility: hidden;
     width: 270px;
-    height: 130px;
+    height: 180px;
     background-color: var(--sub-color);
     padding: 15px;
     display: flex;
@@ -50,10 +66,39 @@ body{
     top: 0;
     bottom: 0;
     margin: auto;
+    gap: 5px;
+    flex-flow: wrap;
 }
 
 .icon{
     width: 20px;
     height: auto;
     align-self: flex-end;
+}
+
+.close-form{
+    padding: 5px;
+    align-self: auto;
+}
+
+.close-form:hover{
+    border: 3px solid var(--sun-color-darker);
+    border-radius: 14px;
+    padding: 2px;
+    background-color: var(--sun-color-darker);
+}
+
+.remove-book{
+    padding: 5px;
+}
+.remove-book:hover{
+    border: 3px solid var(--darker-complement);
+    border-radius: 14px;
+    padding: 2px;
+    background-color: var(--darker-complement);
+}
+
+.add-title{
+    margin: 0 auto;
+    padding-left: 30px;
 }
