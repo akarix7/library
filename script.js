@@ -34,7 +34,6 @@ class Library {
         }
     }
     removeNode(index){
-        console.log("index: " + typeof(index));
         let count = 0;
         let temp = this.head;
         let prevNode;
@@ -47,9 +46,7 @@ class Library {
                 }
             }else if(this.size() === 1){
                 this.head = null;
-                console.log("two");
             }else{
-                console.log("three");
                 while(count !== index){
                     prevNode = temp;
                     temp = temp.next;
@@ -105,7 +102,7 @@ let bookList = new Library();
 function addToLibrary(book){
     //libraryArray.push(Book);
     bookList.addNode(book);
-    buildLibrary();
+    buildBook();
     displayBook();
 }
 
@@ -130,7 +127,7 @@ function displayBook(){
     // }
 }
 
-function buildLibrary(){
+function buildBook(){
     let bookDiv = document.createElement("div");
     bookDiv.className = "book";
     library.appendChild(bookDiv);
@@ -151,6 +148,15 @@ function buildLibrary(){
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
+}
+
+function destroyBook(index){
+    console.log("hey");
+    if(index > 0 && index <= bookList.size()){
+        const book = document.querySelector(".library > :nth-child(" + index + ")");
+        book.remove();
+        console.log(book);
+    }
 }
 
 function createAddButton(){
@@ -187,6 +193,7 @@ function removeButton(){
     removeIcon.forEach((button) => {
         button.addEventListener("click", () => {
             bookList.removeNode(parseInt(button.dataset.index));
+            destroyBook(button.dataset.index + 1);
             console.log(button.dataset.index);
         })
     })
@@ -236,7 +243,7 @@ function closeForm(){
 }
 
 function startup() {
-    // buildLibrary();
+    // buildBook();
     createAddButton();
     submitForm();
     removeButton();
