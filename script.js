@@ -148,6 +148,7 @@ function buildBook(){
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
+    removeButton();
 }
 
 function destroyBook(index){
@@ -185,24 +186,23 @@ function closeButton(){
 }
 //remove all books = querySelectorAll + foreach + addEventListener
 function removeButton(){
-    //const removeIcon = document.querySelector("[data-index=\"0\"]");
-    //const removeIcon = document.querySelector(".remove-book");
+    let index = bookList.size() - 1
+    const button = document.querySelector("[data-index=\""+ index +"\"]");
 
-    // removeIcon.addEventListener("click", (e) => {
-    //     //const removeIndex = document.querySelector("[data-index=\"${e.}]")
-    //     //bookList.removeNode(removeIcon.dataset.index);
-    //     console.log(removeIcon.dataset.index);
-    //     console.log(e.target.dataset.index);
-    // })
-
-    const removeIcon = document.querySelectorAll("[data-index]");
-    removeIcon.forEach((button) => {
-        button.addEventListener("click", () => {
-            destroyBook(parseInt(button.dataset.index) + 1);
-            bookList.removeNode(parseInt(button.dataset.index));
-            reindexBooks();
-        })
+    button.addEventListener("click", () => {
+        destroyBook(parseInt(button.dataset.index) + 1);
+        bookList.removeNode(parseInt(button.dataset.index));
+        reindexBooks();
     })
+//removes all books:
+    //const removeIcon = document.querySelectorAll("[data-index]");
+    // removeIcon.forEach((button) => {
+    //     button.addEventListener("click", () => {
+    //         destroyBook(parseInt(button.dataset.index) + 1);
+    //         bookList.removeNode(parseInt(button.dataset.index));
+    //         reindexBooks();
+    //     })
+    // })
 }
 
 function errorMessage(input){
@@ -252,7 +252,7 @@ function startup() {
     // buildBook();
     createAddButton();
     submitForm();
-    removeButton();
+    //removeButton();
 }
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
