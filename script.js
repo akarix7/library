@@ -151,12 +151,18 @@ function buildBook(){
 }
 
 function destroyBook(index){
-    console.log("hey");
     if(index > 0 && index <= bookList.size()){
         const book = document.querySelector(".library > :nth-child(" + index + ")");
         book.remove();
-        console.log(book);
     }
+}
+
+function reindexBooks(){
+    let i = 0;
+    const button = document.querySelectorAll(".remove-book");
+    button.forEach((btn) => {
+        btn.dataset.index = (i++).toString();
+    })
 }
 
 function createAddButton(){
@@ -192,9 +198,9 @@ function removeButton(){
     const removeIcon = document.querySelectorAll("[data-index]");
     removeIcon.forEach((button) => {
         button.addEventListener("click", () => {
+            destroyBook(parseInt(button.dataset.index) + 1);
             bookList.removeNode(parseInt(button.dataset.index));
-            destroyBook(button.dataset.index + 1);
-            console.log(button.dataset.index);
+            reindexBooks();
         })
     })
 }
