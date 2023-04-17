@@ -99,6 +99,7 @@ function displayBook(){
     book.children[1].textContent = bookList.displayLastNode().title;
     book.children[2].textContent = bookList.displayLastNode().author;
     book.children[3].textContent = bookList.displayLastNode().pages;
+    book.children[4].textContent = bookList.displayLastNode().read ? "Read" : "Unread";
 
     // book.children[1].textContent = libraryArray[libraryArray.length - 1].title;
     // book.children[2].textContent = libraryArray[libraryArray.length - 1].author;
@@ -130,11 +131,16 @@ function buildBook(){
     removeImg.dataset.index = (bookList.size() - 1).toString();
     removeImg.alt = "Remove Book";
     removeImg.src = "images/close-thick.svg";
+    let unread = document.createElement("button");
+    unread.className = "unread";
+    unread.textContent = "Unread";
+    unread.value = "unread";
 
     bookDiv.appendChild(removeImg);
     bookDiv.appendChild(titleH2);
     bookDiv.appendChild(authorH3);
     bookDiv.appendChild(pages);
+    bookDiv.appendChild(unread);
     removeButton();
 }
 
@@ -235,14 +241,22 @@ function closeForm(){
     popup.style.visibility = "hidden";
 }
 
+function readButton(){
+    const button = document.querySelector(".unread");
+    button.addEventListener("click", () => {
+        console.log(button.value);
+    })
+}
+
 function startup() {
     // buildBook();
     createAddButton();
     submitForm();
+    readButton();
 }
 
 const theHobbit = new BookNode("The Hobbit", "J.R.R. Tolkien", 295, false);
-const theMidnightLibrary = new BookNode("The Midnight Library", "Matt Haig", 304, false);
+const theMidnightLibrary = new BookNode("The Midnight Library", "Matt Haig", 304, true);
 const aManCalledOve = new BookNode("A Man Called Ove", "Fredrik Backman", 368, false);
 // const theMartian = new BookNode("The Martian", "Andy Weir", 369, false);
 // const becoming = new BookNode("Becoming", "Michelle Obama", 448, false);
