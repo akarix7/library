@@ -142,6 +142,7 @@ function buildBook(){
     bookDiv.appendChild(pages);
     bookDiv.appendChild(unread);
     removeButton();
+    readButton();
 }
 
 function destroyBook(index){
@@ -180,7 +181,8 @@ function closeButton(){
 }
 //remove all books = querySelectorAll + foreach + addEventListener
 function removeButton(){
-    let index = bookList.size() - 1
+    let index = bookList.size() - 1;
+
     const button = document.querySelector("[data-index=\""+ index +"\"]");
 
     button.addEventListener("click", () => {
@@ -197,6 +199,15 @@ function removeButton(){
     //         reindexBooks();
     //     })
     // })
+}
+
+function readButton(){
+    let index = bookList.size() - 1;
+    const button = document.querySelector("[data-index=\""+ index +"\"]").parentNode.lastChild;
+
+    button.addEventListener("click", () => {
+        toggleRead(index + 1);
+    })
 }
 
 function errorMessage(input){
@@ -241,18 +252,18 @@ function closeForm(){
     popup.style.visibility = "hidden";
 }
 
-function readButton(){
-    const button = document.querySelector(".unread");
-    button.addEventListener("click", () => {
-        console.log(button.value);
-    })
+function toggleRead(index){
+    const button = document.querySelector(".library > :nth-child(" + index + ") > :last-child");
+
+    button.value = (button.value === "read" ? "unread" : "read");
+    button.textContent = button.value;
 }
 
 function startup() {
     // buildBook();
     createAddButton();
     submitForm();
-    readButton();
+    //readButton();
 }
 
 const theHobbit = new BookNode("The Hobbit", "J.R.R. Tolkien", 295, false);
