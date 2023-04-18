@@ -54,6 +54,33 @@ class Library {
             }
         }
     }
+    modifyNode(index, code, data){
+        let count = 0;
+        let temp = this.head;
+        let prevNode;
+
+        if(index >=0 && this.size() > 0 && (index <= this.size() - 1)){
+            while(count !== index){
+                prevNode = temp;
+                temp = temp.next;
+                count++;
+            }
+            switch(code){
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3: temp.read = data;
+                console.log(data);
+                    break;
+                default:
+                    console.log("Error: modifyNode");
+            }
+            console.log(temp);
+        }
+    }
     displayLastNode(){
         let tempNode = this.head;
         let displayNode;
@@ -207,6 +234,7 @@ function readButton(){
 
     button.addEventListener("click", () => {
         toggleRead(index + 1);
+        bookList.modifyNode(index, 3, button.value !== "unread");
     })
 }
 
