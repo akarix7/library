@@ -66,19 +66,17 @@ class Library {
                 count++;
             }
             switch(code){
-                case 0:
+                case 0: temp.title = data;
                     break;
-                case 1:
+                case 1: temp.author = data;
                     break;
-                case 2:
+                case 2: temp.pages = data;
                     break;
                 case 3: temp.read = data;
-                console.log(data);
                     break;
                 default:
                     console.log("Error: modifyNode");
             }
-            console.log(temp);
         }
     }
     displayLastNode(){
